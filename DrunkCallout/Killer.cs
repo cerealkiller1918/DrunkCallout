@@ -2,15 +2,15 @@ using CitizenFX.Core.Native;
 
 namespace DrunkCallout
 {
-    public static class CallOut
+    public static class Killer
     {
-        private static void Notify(string message)
+        public static void Notify(string message)
         {
             API.BeginTextCommandThefeedPost("STRING");
             API.AddTextComponentSubstringPlayerName(message);
             API.EndTextCommandThefeedPostTicker(false, true);
         }
-        private static void DrawSubtitle(string message, int duration)
+        public static void DrawSubtitle(string message, int duration)
         {
             API.BeginTextCommandPrint("STRING");
             API.AddTextComponentSubstringPlayerName(message);

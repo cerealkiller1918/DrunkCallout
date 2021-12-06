@@ -33,7 +33,7 @@ namespace DrunkCallout
             API.SetDriveTaskMaxCruiseSpeed(driver.GetHashCode(),35f);
             API.SetDriveTaskDrivingStyle(driver.GetHashCode(),524852);
             driver.Task.FleeFrom(player);
-            
+            Killer.Notify("~o~Officer ~b~" + displayName + ",~o~ the biker is fleeing!");
 
         }
         

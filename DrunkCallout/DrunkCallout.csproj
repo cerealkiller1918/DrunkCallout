@@ -46,7 +46,7 @@
         <Reference Include="System.Xml" />
     </ItemGroup>
     <ItemGroup>
-        <Compile Include="CallOut.cs" />
+        <Compile Include="Killer.cs" />
         <Compile Include="DrunkBiker.cs" />
         <Compile Include="DrunkFight.cs" />
         <Compile Include="Intoxicated.cs" />
