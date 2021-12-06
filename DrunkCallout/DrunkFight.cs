@@ -11,10 +11,7 @@ namespace DrunkCallout
     {
         public DrunkFight()
         {
-            Random rnd = new Random();
-            float offsetX = rnd.Next(100, 700);
-            float offsetY = rnd.Next(100, 700);
-            InitInfo(World.GetNextPositionOnStreet(Game.PlayerPed.GetPositionOffset(new Vector3(offsetX,offsetY, 0))));
+            InitInfo(World.GetNextPositionOnStreet(Game.PlayerPed.GetPositionOffset(OffSets.RandomOffSet())));
 
             ShortName = "Drunk Fight";
             CalloutDescription = " A fight had broken out with intoxicated people";

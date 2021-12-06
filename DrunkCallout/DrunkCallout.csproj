@@ -46,8 +46,10 @@
         <Reference Include="System.Xml" />
     </ItemGroup>
     <ItemGroup>
+        <Compile Include="DrunkBiker.cs" />
         <Compile Include="DrunkFight.cs" />
         <Compile Include="Intoxicated.cs" />
+        <Compile Include="OffSets.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
     </ItemGroup>
     <ItemGroup>
