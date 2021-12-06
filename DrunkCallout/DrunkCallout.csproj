@@ -8,7 +8,7 @@
         <OutputType>Library</OutputType>
         <AppDesignerFolder>Properties</AppDesignerFolder>
         <RootNamespace>DrunkCallout</RootNamespace>
-        <AssemblyName>DrunkCallout</AssemblyName>
+        <AssemblyName>DrunkCallout.net</AssemblyName>
         <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
         <FileAlignment>512</FileAlignment>
     </PropertyGroup>
@@ -46,11 +46,8 @@
         <Reference Include="System.Xml" />
     </ItemGroup>
     <ItemGroup>
-        <Compile Include="Killer.cs" />
         <Compile Include="DrunkBiker.cs" />
         <Compile Include="DrunkFight.cs" />
-        <Compile Include="Intoxicated.cs" />
-        <Compile Include="OffSets.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
     </ItemGroup>
     <ItemGroup>
