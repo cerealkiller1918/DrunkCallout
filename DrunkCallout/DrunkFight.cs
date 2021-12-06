@@ -9,14 +9,9 @@ namespace DrunkCallout
     [CalloutProperties("Drunk Fight","Cerealkiller1918","0.0.1")]
     public class DrunkFight : Callout
     {
-
-        private Ped _suspect1, _suspect2;
-       
-        Random rnd = new Random();
-
         public DrunkFight()
         {
-            
+            Random rnd = new Random();
             float offsetX = rnd.Next(100, 700);
             float offsetY = rnd.Next(100, 700);
             InitInfo(World.GetNextPositionOnStreet(Game.PlayerPed.GetPositionOffset(new Vector3(offsetX,offsetY, 0))));
@@ -27,21 +22,18 @@ namespace DrunkCallout
             StartDistance = 75f;
 
         }
-
         public async override void OnStart(Ped player)
         {
             base.OnStart(player);
-
-            _suspect1 = await SpawnPed(RandomUtils.GetRandomPed(), Location + 2);
-            _suspect2 = await SpawnPed(RandomUtils.GetRandomPed(), Location + 2);
+            Ped suspect1 = await SpawnPed(RandomUtils.GetRandomPed(), Location + 2);
+            Ped suspect2 = await SpawnPed(RandomUtils.GetRandomPed(), Location + 2);
             
-            Intoxicated.SetUpIntoxicatedPed(_suspect1);
-            Intoxicated.SetUpIntoxicatedPed(_suspect2);;
+            Intoxicated.SetUpIntoxicatedPed(suspect1);
+            Intoxicated.SetUpIntoxicatedPed(suspect2);;
             
-            _suspect1.Task.FightAgainst(_suspect2);
-            _suspect2.Task.FightAgainst(_suspect1);
+            suspect1.Task.FightAgainst(suspect2);
+            suspect2.Task.FightAgainst(suspect1);
         }
-        
         public async override Task OnAccept()
         {
             InitBlip();
