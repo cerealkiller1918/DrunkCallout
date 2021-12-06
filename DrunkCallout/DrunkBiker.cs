@@ -1,5 +1,7 @@
 ﻿using System;
+using System.IO;
 using CitizenFX.Core;
+using CitizenFX.Core.Native;
 using FivePD.API;
 using FivePD.API.Utils;
 
@@ -25,9 +27,14 @@ namespace DrunkCallout
             Vehicle bike = await SpawnVehicle(VehicleHash.TriBike, Location);
             
             Intoxicated.SetUpIntoxicatedPed(driver);
+
+            PlayerData playerData = Utilities.GetPlayerData();
+            string displayName = playerData.DisplayName;
+            API.SetDriveTaskMaxCruiseSpeed(driver.GetHashCode(),35f);
+            API.SetDriveTaskDrivingStyle(driver.GetHashCode(),524852);
+            driver.Task.FleeFrom(player);
             
-            
-            
+
         }
         
         
