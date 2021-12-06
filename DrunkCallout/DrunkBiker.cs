@@ -8,10 +8,11 @@ using FivePD.API.Utils;
 
 namespace DrunkCallout
 {
-    [CalloutProperties("Drunk Biker","Cerealkiller1918","0.0.1")]
-    public class DrunkBiker: Callout
+    [CalloutProperties("Drunk Biker", "Cerealkiller1918", "0.0.1")]
+    public class DrunkBiker : Callout
     {
         private Ped _driver;
+
         public DrunkBiker()
         {
             InitInfo(World.GetNextPositionOnStreet(Game.PlayerPed.GetOffsetPosition(OffSets.RandomOffSet())));
@@ -27,17 +28,18 @@ namespace DrunkCallout
             _driver = await SpawnPed(RandomUtils.GetRandomPed(), Location + 2);
             // need to add a list of bike to chose from.
             Vehicle bike = await SpawnVehicle(VehicleHash.TriBike, Location);
-            
+
             Intoxicated.SetUpIntoxicatedPed(_driver);
 
             PlayerData playerData = Utilities.GetPlayerData();
             string displayName = playerData.DisplayName;
-            API.SetDriveTaskMaxCruiseSpeed(_driver.GetHashCode(),35f);
-            API.SetDriveTaskDrivingStyle(_driver.GetHashCode(),524852);
+            API.SetDriveTaskMaxCruiseSpeed(_driver.GetHashCode(), 35f);
+            API.SetDriveTaskDrivingStyle(_driver.GetHashCode(), 524852);
             _driver.Task.FleeFrom(player);
             Killer.Notify("~o~Officer ~b~" + displayName + ",~o~ the biker is fleeing!");
             bike.AttachBlip();
-            
+        }
+
         public async override Task OnAccept()
         {
             InitBlip();
@@ -48,8 +50,8 @@ namespace DrunkCallout
             UpdateData();
         }
 
-        }
-        
-        
     }
 }
+        
+        
+    
