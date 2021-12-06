@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Threading.Tasks;
 using CitizenFX.Core;
 using CitizenFX.Core.Native;
 using FivePD.API;
@@ -10,6 +11,7 @@ namespace DrunkCallout
     [CalloutProperties("Drunk Biker","Cerealkiller1918","0.0.1")]
     public class DrunkBiker: Callout
     {
+        private Ped _driver;
         public DrunkBiker()
         {
             InitInfo(World.GetNextPositionOnStreet(Game.PlayerPed.GetOffsetPosition(OffSets.RandomOffSet())));
@@ -22,18 +24,29 @@ namespace DrunkCallout
         public async override void OnStart(Ped player)
         {
             base.OnStart(player);
-            Ped driver = await SpawnPed(RandomUtils.GetRandomPed(), Location + 2);
+            _driver = await SpawnPed(RandomUtils.GetRandomPed(), Location + 2);
             // need to add a list of bike to chose from.
             Vehicle bike = await SpawnVehicle(VehicleHash.TriBike, Location);
             
-            Intoxicated.SetUpIntoxicatedPed(driver);
+            Intoxicated.SetUpIntoxicatedPed(_driver);
 
             PlayerData playerData = Utilities.GetPlayerData();
             string displayName = playerData.DisplayName;
-            API.SetDriveTaskMaxCruiseSpeed(driver.GetHashCode(),35f);
-            API.SetDriveTaskDrivingStyle(driver.GetHashCode(),524852);
-            driver.Task.FleeFrom(player);
+            API.SetDriveTaskMaxCruiseSpeed(_driver.GetHashCode(),35f);
+            API.SetDriveTaskDrivingStyle(_driver.GetHashCode(),524852);
+            _driver.Task.FleeFrom(player);
             Killer.Notify("~o~Officer ~b~" + displayName + ",~o~ the biker is fleeing!");
+            bike.AttachBlip();
+            
+        public async override Task OnAccept()
+        {
+            InitBlip();
+            PedData pedData = await Utilities.GetPedData(_driver.NetworkId);
+            string firstname = pedData.FirstName;
+            API.Wait(60000);
+            Killer.DrawSubtitle("~r~[" + firstname + "] ~s~Are those police lights?", 5000);
+            UpdateData();
+        }
 
         }
         
