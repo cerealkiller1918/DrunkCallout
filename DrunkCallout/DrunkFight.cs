@@ -13,7 +13,6 @@ namespace DrunkCallout
     {
 
         private Ped _suspect1, _suspect2;
-        private float _blood1, _blood2;
         private readonly String[] items = {"Beer", "Wine", "Whiskey", "Moon shine"};
         Random rnd = new Random();
 
@@ -22,10 +21,6 @@ namespace DrunkCallout
             
             float offsetX = rnd.Next(100, 700);
             float offsetY = rnd.Next(100, 700);
-            _blood1 = rnd.Next(8, 150);
-            _blood1 = _blood1 / 100;
-            _blood2 = rnd.Next(8, 150);
-            _blood2 = _blood2 / 100;
             InitInfo(World.GetNextPositionOnStreet(Game.PlayerPed.GetPositionOffset(new Vector3(offsetX,offsetY, 0))));
 
             ShortName = "Drunk Fight";
@@ -55,7 +50,9 @@ namespace DrunkCallout
             PedData data = new PedData();
 
             List<Item> list = new List<Item>();
-            data.BloodAlcoholLevel = _blood1;
+            float blood = rnd.Next(80, 150);
+            
+            data.BloodAlcoholLevel = blood/100;
             var itemName2 = items[rnd.Next(items.Length)];
             Item item2 = new Item()
             {
