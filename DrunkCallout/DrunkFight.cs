@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Dynamic;
 using System.Threading.Tasks;
 using CitizenFX.Core;
-using CitizenFX.Core.Native;
 using FivePD.API;
 using FivePD.API.Utils;
 
@@ -14,7 +11,7 @@ namespace DrunkCallout
     {
 
         private Ped _suspect1, _suspect2;
-        private readonly String[] items = {"Beer", "Wine", "Whiskey", "Moon shine"};
+       
         Random rnd = new Random();
 
         public DrunkFight()
@@ -38,8 +35,8 @@ namespace DrunkCallout
             _suspect1 = await SpawnPed(RandomUtils.GetRandomPed(), Location + 2);
             _suspect2 = await SpawnPed(RandomUtils.GetRandomPed(), Location + 2);
             
-            Intoxicated.SetUpIntoxicatedPed(_suspect1,items);
-            Intoxicated.SetUpIntoxicatedPed(_suspect2,items);;
+            Intoxicated.SetUpIntoxicatedPed(_suspect1);
+            Intoxicated.SetUpIntoxicatedPed(_suspect2);;
             
             _suspect1.Task.FightAgainst(_suspect2);
             _suspect2.Task.FightAgainst(_suspect1);

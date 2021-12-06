@@ -9,8 +9,9 @@ namespace DrunkCallout
 {
     public static class Intoxicated
     {
-        public static void SetUpIntoxicatedPed(Ped suspect, String[] items)
+        public static void SetUpIntoxicatedPed(Ped suspect)
         {
+             String[] items = {"Beer", "Wine", "Whiskey", "Moon shine"};
             Random rnd = new Random();
             PedData data = new PedData();
 
