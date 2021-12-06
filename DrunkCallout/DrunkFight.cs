@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Threading.Tasks;
 using CitizenFX.Core;
 using CitizenFX.Core.Native;
@@ -37,38 +38,13 @@ namespace DrunkCallout
             _suspect1 = await SpawnPed(RandomUtils.GetRandomPed(), Location + 2);
             _suspect2 = await SpawnPed(RandomUtils.GetRandomPed(), Location + 2);
             
-            
-            SetUpIntoxicated(_suspect1);
-            SetUpIntoxicated(_suspect2);
+            Intoxicated.SetUpIntoxicatedPed(_suspect1,items);
+            Intoxicated.SetUpIntoxicatedPed(_suspect2,items);;
             
             _suspect1.Task.FightAgainst(_suspect2);
             _suspect2.Task.FightAgainst(_suspect1);
         }
-
-        private void SetUpIntoxicated(Ped suspect)
-        {
-            PedData data = new PedData();
-
-            List<Item> list = new List<Item>();
-            float blood = rnd.Next(80, 150);
-            
-            data.BloodAlcoholLevel = blood/100;
-            var itemName2 = items[rnd.Next(items.Length)];
-            Item item2 = new Item()
-            {
-                Name = itemName2,
-                IsIllegal = false
-            };
-            list.Add(item2);
-            data.Items = list;
-            Utilities.SetPedData(suspect.NetworkId, data);
-
-            suspect.AlwaysKeepTask = true;
-            suspect.BlockPermanentEvents = true;
-            API.SetPedIsDrunk(suspect.GetHashCode(),true);
-            suspect.AttachBlip();
-        }
-
+        
         public async override Task OnAccept()
         {
             InitBlip();
